@@ -2,12 +2,12 @@ require('dotenv').config();
 
 
 const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const userRoutes = require('./user/userRoutes.js');
-const adminRoutes = require('./admin/adminRoutes.js');
-const mongoose = require('mongoose');
-const { Service } = require('./schema.js');
+// const bodyParser = require('body-parser');
+// const cors = require('cors');
+// const userRoutes = require('./user/userRoutes.js');
+// const adminRoutes = require('./admin/adminRoutes.js');
+// const mongoose = require('mongoose');
+// const { Service } = require('./schema.js');
 
 // const uri = process.env.MONGODB_URI;
 // mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -27,12 +27,12 @@ const app = express();
 const port = process.env.PORT;
 
 // Middleware
-app.use(cors(
-//   {
-//   origin: '',
-//   credentials: true
-// }
-));
+// app.use(cors(
+// //   {
+// //   origin: '',
+// //   credentials: true
+// // }
+// ));
 // app.use(bodyParser.json({ limit: '500mb' }));
 // app.use(bodyParser.urlencoded({ extended: true, limit: '500mb' }));
 
@@ -47,15 +47,15 @@ app.get("/", (req, res) => {
 //   res.status(500).send('Internal Server Error');
 // });
 
-app.get('/services', async (req, res) => {
-  try {
-    //const services = await Service.find();
-    res.status(200).json("services");
-  } catch (error) {
-    console.error('Error fetching services:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+// app.get('/services', async (req, res) => {
+//   try {
+//     //const services = await Service.find();
+//     res.status(200).json("services");
+//   } catch (error) {
+//     console.error('Error fetching services:', error);
+//     res.status(500).json({ error: 'Internal Server Error' });
+//   }
+// });
 
 
 // module.exports = db;
