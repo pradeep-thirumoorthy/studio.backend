@@ -100,4 +100,4 @@ const eventSchema = new mongoose.Schema({
 const EventModel = mongoose.model('Event', eventSchema);
 
 const Admin = mongoose.model('Admin', AdminSchema, 'adminLogins');
-export default { User, Order, CartItem, Gallery ,Service,Admin,EventModel};
+export { User, Order, CartItem, Gallery ,Service,Admin,EventModel};

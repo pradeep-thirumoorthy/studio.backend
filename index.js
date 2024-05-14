@@ -6,7 +6,7 @@ import bodyParser from 'body-parser';
 // const cors = require('cors');
 // const userRoutes = require('./user/userRoutes.js');
 // const adminRoutes = require('./admin/adminRoutes.js');
-const { Service } = require('./schema.js');
+import {Service} from './schema.js';
 
 import mongoose from 'mongoose';
 
