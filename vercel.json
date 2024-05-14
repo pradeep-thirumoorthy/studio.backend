@@ -1,0 +1,9 @@
+{
+    "scripts": {
+        "start": "node server.js"
+      },
+    "rewrites": [
+      { "source": "/(.*)", "destination": "/server.js" }
+    ]
+  }
+  
