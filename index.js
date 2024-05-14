@@ -24,7 +24,7 @@ async function run() {
 }
 run().catch(console.dir);
 const app = express();
-const port = process.env.PORT;
+const port = 3010;
 
 // Middleware
 app.use(cors({
@@ -35,27 +35,6 @@ app.use(bodyParser.json({ limit: '500mb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '500mb' }));
 
 app.get("/", (req, res) => res.send("Express on Vercel"));
-app.use('/user', userRoutes);
-app.use('/admin', adminRoutes);
-
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Internal Server Error');
-});
-
-app.get('/services', async (req, res) => {
-  try {
-    const services = await Service.find();
-    res.status(200).json(services);
-  } catch (error) {
-    console.error('Error fetching services:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
-
-
-module.exports = db;
-
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
