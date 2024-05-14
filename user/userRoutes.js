@@ -19,7 +19,7 @@ router.post('/login', async (req, res) => {
     }
     const secretKey = 'your_secret_key';
     const token = jwt.sign({ username: user.username }, secretKey, { expiresIn: '1h' });
-    res.cookie('token', token, { httpOnly: true, maxAge: 3600000, sameSite: 'None'}); // Expires in 1 hour
+    res.cookie('token', token, { httpOnly: true, maxAge: 3600000, sameSite: 'None', secure: true }); // Expires in 1 hour
 
     return res.status(200).json({ success: true, message: 'Login successful', token });
   } catch (err) {
@@ -34,7 +34,7 @@ router.use('/Gallery', galleryRoutes);
 
 
 router.put('/logout', (req, res) => {
-  res.clearCookie('token', { sameSite: "None" });;
+  res.clearCookie('token', "-----" ,{ httpOnly: true, maxAge: 0, sameSite: 'None', secure: true });
   console.log("Token Cleared");
   return res.status(200).json({ success: true, message: 'Logout successful' });
 });

@@ -25,7 +25,7 @@ router.post('/login', async (req, res) => {
     }
     const secretKey = 'your_secret_key';
     const token = jwt.sign({ username: user.username }, secretKey, { expiresIn: '1h' });
-    res.cookie('admin-token', token, { httpOnly: true, maxAge: 3600000, sameSite: 'None'});
+    res.cookie('admin-token', token, { httpOnly: true, maxAge: 3600000, sameSite: 'None', secure: true });
  // Expires in 1 hour
 
     return res.status(200).json({ success: true, message: 'Login successful', token });
@@ -37,7 +37,7 @@ router.post('/login', async (req, res) => {
 
 
 router.put('/logout', (req, res) => {
-    res.cookie('admin-token', "-----", { httpOnly: true, maxAge: 0, sameSite: 'None'});
+  res.clearCookie("admin-token","-----", { httpOnly: true, maxAge: 0, sameSite: 'None', secure: true });
   console.log("Token Cleared");
   return res.status(200).json({ success: true, message: 'Logout successful' });
 });
