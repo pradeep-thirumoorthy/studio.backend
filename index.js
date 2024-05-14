@@ -28,7 +28,7 @@ const port = process.env.PORT;
 
 // Middleware
 app.use(cors({
-  origin: process.env.ACCESS_ORIGIN,
+  origin: '*',
   credentials: true
 }));
 app.use(bodyParser.json({ limit: '500mb' }));
