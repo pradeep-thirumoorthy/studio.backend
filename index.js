@@ -32,7 +32,7 @@ const port = 3010;
 
 app.use(cors(
   {
-  origin: '*',
+  origin: 'https://new-bharani-digital-studio.vercel.app/',
   credentials: true
 }
 ));
