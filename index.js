@@ -8,32 +8,32 @@ const express = require('express');
 // const adminRoutes = require('./admin/adminRoutes.js');
 // const { Service } = require('./schema.js');
 
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 
-// const uri = process.env.MONGODB_URI;
-const uri = "mongodb+srv://new_bharani:qwert@newbharanistudio.rr0qcl6.mongodb.net/?retryWrites=true&w=majority&appName=newbharanistudio";
+// // const uri = process.env.MONGODB_URI;
+// const uri = "mongodb+srv://new_bharani:qwert@newbharanistudio.rr0qcl6.mongodb.net/?retryWrites=true&w=majority&appName=newbharanistudio";
 
-async function connectToDatabase() {
-  try {
-    await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-    console.log("Connected to MongoDB successfully!");
-  } catch (error) {
-    console.error("Error connecting to MongoDB:", error);
-    process.exit(1);
-  }
-}
+// async function connectToDatabase() {
+//   try {
+//     await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+//     console.log("Connected to MongoDB successfully!");
+//   } catch (error) {
+//     console.error("Error connecting to MongoDB:", error);
+//     process.exit(1);
+//   }
+// }
 
-connectToDatabase();
+// connectToDatabase();
 const app = express();
 const port = 3010;
 
 // Middleware
-// app.use(cors(
-// //   {
-// //   origin: '',
-// //   credentials: true
-// // }
-// ));
+app.use(cors(
+  {
+  origin: '*',
+  credentials: true
+}
+));
 // app.use(bodyParser.json({ limit: '500mb' }));
 // app.use(bodyParser.urlencoded({ extended: true, limit: '500mb' }));
 
