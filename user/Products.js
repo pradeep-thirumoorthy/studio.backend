@@ -1,14 +1,12 @@
-const express = require('express');
-const { Order, CartItem, User, Gallery } = require('../schema.js');
-const multer = require('multer');
-const crypto = require('crypto');
-const authuser = require('./auth.js');
-const Razorpay = require('razorpay');
+import express from 'express';
+import { Order, CartItem, User, Gallery } from '../schema.js';
+import multer from 'multer';
+import crypto from 'crypto';
+import authuser from './auth.js';
+import Razorpay from 'razorpay';
 
 const router = express.Router();
 const upload = multer();
-
-
 
 
 router.post('/cart/pay',async (req,res)=>{
@@ -363,4 +361,4 @@ router.post('/CartToOrders', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router

@@ -1,9 +1,9 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const crypto = require('crypto');
-const authadmin = require('./auth.js');
+import { Router } from 'express';
+import { Schema, model } from 'mongoose';
+import { randomBytes, createCipheriv } from 'crypto';
+import authadmin from './auth.js';
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
   phoneNo: String,
   firstName: String,
   lastName: String,
@@ -12,9 +12,9 @@ const userSchema = new mongoose.Schema({
   email: String
 });
 
-const User = mongoose.model('Users', userSchema, 'userLogins');
+const User = model('Users', userSchema, 'userLogins');
 
-const orderItemSchema = new mongoose.Schema({
+const orderItemSchema = new Schema({
   align: String,
   dimension: String,
   frameColor: String,
@@ -22,10 +22,10 @@ const orderItemSchema = new mongoose.Schema({
   amount: Number,
 });
 
-const orderSchema = new mongoose.Schema({
+const orderSchema = new Schema({
   items: [orderItemSchema],
   username: String,
-  userInfo: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, // Reference to User model
+  userInfo: { type: Schema.Types.ObjectId, ref: 'User' }, // Reference to User model
   amount: Number,
   status: String,
   createdAt: {
@@ -35,9 +35,9 @@ const orderSchema = new mongoose.Schema({
 });
 
 
-const Order = mongoose.model('Orders', orderSchema, 'order');
+const Order = model('Orders', orderSchema, 'order');
 
-const router = express.Router();
+const router = Router();
 
 router.get('/Orders/:status', async (req, res) => {
   try {
@@ -68,11 +68,11 @@ router.get('/qrcode', async (req, res) => {
     const dataToEncrypt = { username, _id };
 
     // Generate a random key and initialization vector (IV)
-    const key = crypto.randomBytes(32); // 256 bits
-    const iv = crypto.randomBytes(16); // 128 bits
+    const key = randomBytes(32); // 256 bits
+    const iv = randomBytes(16); // 128 bits
 
     // Encrypt the data using AES-256-CBC
-    const cipher = crypto.createCipheriv('aes-256-cbc', key, iv);
+    const cipher = createCipheriv('aes-256-cbc', key, iv);
     let encryptedData = cipher.update(JSON.stringify(dataToEncrypt), 'utf-8', 'hex');
     encryptedData += cipher.final('hex');
 
@@ -153,4 +153,4 @@ router.post('/Updation', async (req, res) => {
 
 
 
-module.exports = router;
+export default router;

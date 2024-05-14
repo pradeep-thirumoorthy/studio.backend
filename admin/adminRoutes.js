@@ -1,10 +1,11 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const jwt = require('jsonwebtoken');
-const authadmin = require('./auth.js');
-const productRoutes = require('./Products.js');
-const Services = require('./Services.js');
-const {Admin,EventModel} = require('./../schema.js');
+import express from 'express';
+import bodyParser from 'body-parser';
+import jwt from 'jsonwebtoken';
+import authadmin from './auth.js';
+import productRoutes from './Products.js';
+import Services from './Services.js';
+import { Admin, EventModel } from './../schema.js';
+
 
 
 const router = express.Router();
@@ -169,5 +170,4 @@ router.get('/profile', async (req, res) => {
     return res.status(500).json({ success: false, message: 'Server error' });
   }
 });
-
-module.exports = router;
+export default router

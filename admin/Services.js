@@ -1,8 +1,8 @@
-const express = require('express');
-const authadmin = require('./auth.js');
-const {Service} = require('./../schema.js');
+import { Router } from 'express';
+import authadmin from './auth.js';
+import { Service } from './../schema.js';
 
-const router = express.Router();
+const router = Router();
 
 router.post('/add', async (req, res) => {
     try {
@@ -87,4 +87,4 @@ router.delete('/delete/:id', async (req, res) => {
 
 
 
-module.exports = router;
+export default router;

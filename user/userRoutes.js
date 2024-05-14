@@ -1,11 +1,11 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const jwt = require('jsonwebtoken');
-const authuser = require('./auth.js');
+import express from 'express';
+import bodyParser from 'body-parser';
+import jwt from 'jsonwebtoken';
+import authuser from './auth.js';
+import { User } from '../schema.js';
+import productRoutes from './Products.js';
+import galleryRoutes from './Gallery.js';
 
-const { User } = require('../schema.js');
-const productRoutes = require('./Products.js');
-const galleryRoutes = require('./Gallery.js');
 
 const router = express.Router();
 router.use(bodyParser.json());
@@ -111,4 +111,5 @@ router.post('/signup', async (req, res) => {
     return res.status(500).json({ success: false, message: 'Server error' });
   }
 });
-module.exports = router;
+
+export default router;

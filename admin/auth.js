@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 async function authadmin(cookieHeader) {
   if (!cookieHeader) {
     throw new Error('Cookie header is missing');
@@ -11,7 +11,7 @@ async function authadmin(cookieHeader) {
 
     if (name === 'admin-token') {
       try {
-        const decodedToken = jwt.verify(value, 'your_secret_key');
+        const decodedToken = verify(value, 'your_secret_key');
         return decodedToken;
       } catch (error) {
         throw new Error('Failed to verify token');
@@ -22,4 +22,4 @@ async function authadmin(cookieHeader) {
   throw new Error('Admin token not found');
 }
 
-module.exports = authadmin;
+export default authadmin;

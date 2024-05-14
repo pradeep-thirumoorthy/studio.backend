@@ -1,17 +1,20 @@
-// require('dotenv').config();
+
 
 
 import express from 'express';
 import bodyParser from 'body-parser';
-// const cors = require('cors');
-// const userRoutes = require('./user/userRoutes.js');
-// const adminRoutes = require('./admin/adminRoutes.js');
+import dotenv from 'dotenv';
+import cors from 'cors';
+import userRoutes from './user/userRoutes.js';
+import adminRoutes from './admin/adminRoutes.js';
+
+
+dotenv.config();
 import {Service} from './schema.js';
 
 import mongoose from 'mongoose';
 
-//const uri = process.env.MONGODB_URI;
-const uri = "mongodb+srv://new_bharani:qwert@newbharanistudio.rr0qcl6.mongodb.net/?retryWrites=true&w=majority&appName=newbharanistudio";
+const uri = process.env.MONGODB_URI;
 
 async function connectToDatabase() {
   try {
@@ -27,26 +30,25 @@ connectToDatabase();
 const app = express();
 const port = 3010;
 
-// Middleware
-// app.use(cors(
-//   {
-//   origin: '*',
-//   credentials: true
-// }
-// ));
-app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true, limit: '500mb' }));
+app.use(cors(
+  {
+  origin: '*',
+  credentials: true
+}
+));
+app.use(bodyParser.json({limit: '500mb'}));
+app.use(bodyParser.urlencoded({ extended: true, limit: '500mb' }));
 
 app.get("/", (req, res) => {
   res.send("Express on Vercel");
 });
-// app.use('/user', userRoutes);
-// app.use('/admin', adminRoutes);
+app.use('/user', userRoutes);
+app.use('/admin', adminRoutes);
 
-// app.use((err, req, res, next) => {
-//   console.error(err.stack);
-//   res.status(500).send('Internal Server Error');
-// });
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Internal Server Error');
+});
 
 app.get('/services', async (req, res) => {
   try {
@@ -59,7 +61,6 @@ app.get('/services', async (req, res) => {
 });
 
 
-// module.exports = db;
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

@@ -1,8 +1,8 @@
-const express = require('express');
-const { Gallery, User } = require('../schema.js');
-const authuser = require('./auth.js');
+import { Router } from 'express';
+import { Gallery, User } from '../schema.js';
+import authuser from './auth.js';
 
-const router = express.Router();
+const router = Router();
 
 // Route to list all images in the user's gallery
 router.get('/', async (req, res) => {
@@ -72,4 +72,4 @@ router.delete('/Delete/:id', async (req, res) => {
 });
 
 
-module.exports = router;
+export default router;
