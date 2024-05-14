@@ -27,21 +27,25 @@ const app = express();
 const port = process.env.PORT;
 
 // Middleware
-app.use(cors({
-  origin: '*',
-  credentials: true
-}));
-app.use(bodyParser.json({ limit: '500mb' }));
-app.use(bodyParser.urlencoded({ extended: true, limit: '500mb' }));
+app.use(cors(
+//   {
+//   origin: '',
+//   credentials: true
+// }
+));
+// app.use(bodyParser.json({ limit: '500mb' }));
+// app.use(bodyParser.urlencoded({ extended: true, limit: '500mb' }));
 
-app.get("/", (req, res) => res.send("Express on Vercel"));
+app.get("/", (req, res) => {
+  res.send("Express on Vercel");
+});
 app.use('/user', userRoutes);
 app.use('/admin', adminRoutes);
 
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Internal Server Error');
-});
+// app.use((err, req, res, next) => {
+//   console.error(err.stack);
+//   res.status(500).send('Internal Server Error');
+// });
 
 app.get('/services', async (req, res) => {
   try {
@@ -54,6 +58,7 @@ app.get('/services', async (req, res) => {
 });
 
 
+// module.exports = db;
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
