@@ -47,7 +47,7 @@ app.use('/admin', adminRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).send('Internal Server Error');
+  res.status(500).send({err:'Internal Server Error',err:err.stack});
 });
 
 app.get('/services', async (req, res) => {
