@@ -34,7 +34,7 @@ router.use('/Gallery', galleryRoutes);
 
 
 router.put('/logout', (req, res) => {
-  res.clearCookie("token");
+  res.clearCookie('token', { sameSite: "None" });;
   console.log("Token Cleared");
   return res.status(200).json({ success: true, message: 'Logout successful' });
 });
