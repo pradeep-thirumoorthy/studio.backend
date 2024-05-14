@@ -1,4 +1,4 @@
-require('dotenv').config();
+// require('dotenv').config();
 
 
 const express = require('express');
@@ -28,12 +28,12 @@ const app = express();
 const port = 3010;
 
 // Middleware
-app.use(cors(
-  {
-  origin: '*',
-  credentials: true
-}
-));
+// app.use(cors(
+//   {
+//   origin: '*',
+//   credentials: true
+// }
+// ));
 // app.use(bodyParser.json({ limit: '500mb' }));
 // app.use(bodyParser.urlencoded({ extended: true, limit: '500mb' }));
 
