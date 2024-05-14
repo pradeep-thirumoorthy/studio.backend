@@ -37,7 +37,7 @@ router.post('/login', async (req, res) => {
 
 
 router.put('/logout', (req, res) => {
-  res.clearCookie("admin-token", { sameSite: "None" });
+    res.cookie('admin-token', "-----", { httpOnly: true, maxAge: 0, sameSite: 'None'});
   console.log("Token Cleared");
   return res.status(200).json({ success: true, message: 'Logout successful' });
 });
