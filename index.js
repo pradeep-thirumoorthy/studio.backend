@@ -6,7 +6,7 @@ import bodyParser from 'body-parser';
 // const cors = require('cors');
 // const userRoutes = require('./user/userRoutes.js');
 // const adminRoutes = require('./admin/adminRoutes.js');
-// const { Service } = require('./schema.js');
+const { Service } = require('./schema.js');
 
 import mongoose from 'mongoose';
 
@@ -50,8 +50,8 @@ app.get("/", (req, res) => {
 
 app.get('/services', async (req, res) => {
   try {
-    //const services = await Service.find();
-    res.status(200).json({"services":"qawsedrf"});
+    const services = await Service.find();
+    res.status(200).json(services);
   } catch (error) {
     console.error('Error fetching services:', error);
     res.status(500).json({ error: 'Internal Server Error' });

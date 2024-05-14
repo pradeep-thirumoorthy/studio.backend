@@ -1,5 +1,5 @@
+import mongoose from "mongoose";
 
-const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
   phoneNo: String,
@@ -100,4 +100,4 @@ const eventSchema = new mongoose.Schema({
 const EventModel = mongoose.model('Event', eventSchema);
 
 const Admin = mongoose.model('Admin', AdminSchema, 'adminLogins');
-module.exports = { User, Order, CartItem, Gallery ,Service,Admin,EventModel};
+export default { User, Order, CartItem, Gallery ,Service,Admin,EventModel};
