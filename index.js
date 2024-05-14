@@ -6,23 +6,23 @@ const express = require('express');
 // const cors = require('cors');
 // const userRoutes = require('./user/userRoutes.js');
 // const adminRoutes = require('./admin/adminRoutes.js');
-const mongoose = require('mongoose');
 // const { Service } = require('./schema.js');
 
-const uri = process.env.MONGODB_URI;
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-const db = mongoose.connection;
+const mongoose = require('mongoose');
 
-const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
-async function run() {
+const uri = process.env.MONGODB_URI;
+
+async function connectToDatabase() {
   try {
-    await mongoose.connect(uri, clientOptions);
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } finally {
-    
+    await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+    console.log("Connected to MongoDB successfully!");
+  } catch (error) {
+    console.error("Error connecting to MongoDB:", error);
+    process.exit(1); // Exit the process if unable to connect to MongoDB
   }
 }
-run().catch(console.dir);
+
+connectToDatabase();
 const app = express();
 const port = process.env.PORT;
 
