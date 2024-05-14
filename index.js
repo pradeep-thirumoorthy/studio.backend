@@ -33,8 +33,10 @@ const port = process.env.PORT;
 // //   credentials: true
 // // }
 // ));
-app.use(bodyParser.json({ limit: '500mb' }));
-app.use(bodyParser.urlencoded({ extended: true, limit: '500mb' }));
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// Parse JSON bodies (as sent by API clients)
+app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
   res.send("Express on Vercel");
