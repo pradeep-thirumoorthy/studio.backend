@@ -14,7 +14,7 @@ async function authadmin(cookieHeader) {
         const decodedToken = jwt.verify(value, 'your_secret_key');
         return decodedToken;
       } catch (error) {
-        throw new Error('Failed to verify token');
+        throw new Error({mes:'Failed to verify token',cookies});
       }
     }
   }
