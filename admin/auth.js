@@ -11,7 +11,7 @@ async function authadmin(cookieHeader) {
 
     if (name === 'admin-token') {
       try {
-        const decodedToken = verify(value, 'your_secret_key');
+        const decodedToken = jwt.verify(value, 'your_secret_key');
         return decodedToken;
       } catch (error) {
         throw new Error('Failed to verify token');
