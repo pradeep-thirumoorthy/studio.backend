@@ -1,8 +1,8 @@
 // require('dotenv').config();
 
 
-const express = require('express');
-// const bodyParser = require('body-parser');
+import express from 'express';
+import bodyParser from 'body-parser';
 // const cors = require('cors');
 // const userRoutes = require('./user/userRoutes.js');
 // const adminRoutes = require('./admin/adminRoutes.js');
@@ -34,7 +34,7 @@ const port = 3010;
 //   credentials: true
 // }
 // ));
-// app.use(bodyParser.json({ limit: '500mb' }));
+app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: true, limit: '500mb' }));
 
 app.get("/", (req, res) => {
@@ -65,4 +65,4 @@ app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
-module.exports=app;
+export default app;
