@@ -10,7 +10,8 @@ const express = require('express');
 
 const mongoose = require('mongoose');
 
-const uri = process.env.MONGODB_URI;
+// const uri = process.env.MONGODB_URI;
+const uri = "mongodb+srv://new_bharani:qwert@newbharanistudio.rr0qcl6.mongodb.net/?retryWrites=true&w=majority&appName=newbharanistudio";
 
 async function connectToDatabase() {
   try {
@@ -18,13 +19,13 @@ async function connectToDatabase() {
     console.log("Connected to MongoDB successfully!");
   } catch (error) {
     console.error("Error connecting to MongoDB:", error);
-    process.exit(1); // Exit the process if unable to connect to MongoDB
+    process.exit(1);
   }
 }
 
 connectToDatabase();
 const app = express();
-const port = process.env.PORT;
+const port = 3010;
 
 // Middleware
 // app.use(cors(
