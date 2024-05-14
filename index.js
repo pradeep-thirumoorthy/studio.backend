@@ -32,7 +32,7 @@ const port = 3010;
 
 app.use(cors(
   {
-  origin: 'http://localhost:5173',
+  origin: 'https://new-bharani-digital-studio.vercel.app',
   credentials: true
 }
 ));
@@ -47,7 +47,7 @@ app.use('/admin', adminRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).send({err:'Internal Server Error',err:err.stack});
+  res.status(500).send({msg:'Internal Server Error',err:err.stack});
 });
 
 app.get('/services', async (req, res) => {
