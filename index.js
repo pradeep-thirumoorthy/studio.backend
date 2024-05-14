@@ -32,7 +32,7 @@ const port = 3010;
 
 app.use(cors(
   {
-  origin: 'https://new-bharani-digital-studio.vercel.app',
+  origin: 'http://localhost:5173',
   credentials: true
 }
 ));
