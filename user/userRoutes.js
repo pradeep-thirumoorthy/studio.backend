@@ -6,6 +6,7 @@ import { User } from '../schema.js';
 import productRoutes from './Products.js';
 import galleryRoutes from './Gallery.js';
 
+import nodemailer from 'nodemailer';
 
 const router = express.Router();
 router.use(bodyParser.json());
@@ -92,13 +93,66 @@ router.get('/profile', async (req, res) => {
 
 
 
-router.post('/signup', async (req, res) => {
-  const { username } = req.body;
+// Generate a random 6-digit OTP
+function generateOTP() {
+  return Math.floor(100000 + Math.random() * 900000);
+}
+
+// Create a Nodemailer transporter
+const transporter = nodemailer.createTransport({
+  service: 'Gmail', // Specify your email service provider, e.g., 'Gmail', 'Yahoo', etc.
+  auth: {
+    user: 'pradeept.21cse@kongu.edu', // Specify your email address
+    pass: 'World@12345qwert' // Specify your email password or application-specific password
+  }
+});
+
+// Route to generate and send OTP
+router.get('/otp', async (req, res) => {
   try {
-    // Check if the username is already taken
-    const existingUser = await User.findOne({ username });
+    // Generate a 6-digit OTP
+    
+    const { email } = req.query;
+    const otp = generateOTP();
+console.log(otp,email);
+    // Send OTP to frontend
+
+    // Send OTP via email
+    const mailOptions = {
+      from: 'pradeept.21cse@kongu.edu',
+      to: email,
+      subject: 'Your OTP',
+      text: `Your OTP is: ${otp}`
+    };
+
+    
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error('Error sending email:', error);
+      } else {
+        
+        res.status(200).json({ success: true, otp: otp });
+        console.log('Email sent:', info.response);
+      }
+    });
+  } catch (error) {
+    console.error('Error generating OTP:', error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+
+router.post('/signup', async (req, res) => {
+  const { username, email, phoneNo } = req.body;
+  try {
+    // Check if the username, email, or phone number is already taken
+    const existingUser = await User.findOne({ $or: [{ username }, { email }, { phoneNo }] });
     if (existingUser) {
-      return res.status(400).json({ success: false, message: 'Username is already taken' });
+      const takenFields = [];
+      if (existingUser.username === username) takenFields.push('username');
+      if (existingUser.email === email) takenFields.push('email');
+      if (existingUser.phoneNo === phoneNo) takenFields.push('phone number');
+      return res.status(400).json({ success: false, message: `${takenFields.join(', ')} already taken` });
     }
 
     const newUser = new User(req.body);
@@ -111,5 +165,6 @@ router.post('/signup', async (req, res) => {
     return res.status(500).json({ success: false, message: 'Server error' });
   }
 });
+
 
 export default router;
